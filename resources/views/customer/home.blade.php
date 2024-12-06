@@ -49,8 +49,7 @@
                     </div>
                     <div class="py-4">
                         <p class="font-semibold">{{ $prod->product_title }}</p>
-                        <p>{{ $prod->quantity }} Variants</p>
-                        <div class="mt-2">
+                        <div class="">
                             <p class="text-gray-500">₱{{ number_format($prod->price, 2) }}</p>
                         </div>
 

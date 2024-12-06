@@ -92,9 +92,9 @@ class HomeController extends Controller
     
             $cart->save();
     
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            return redirect()->back()->with('success', 'Product added to bag successfully!');
         } else {
-            return redirect()->route('login')->with('error', 'Please log in to add items to the cart.');
+            return redirect()->route('login')->with('error', 'Please log in to add items to the bag.');
         }
     }
 

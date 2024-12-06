@@ -72,9 +72,9 @@
 
             <!-- Fregister -->
             @if (Route::has('password.request'))
-                <div class="flex justify-end">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                        don't have account yet?
+                <div class="flex justify-center">
+                    <a class="underline text-sm text-red-600 hover:text-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                        Don't have account yet?
                     </a>
                 </div>
             @endif
@@ -89,11 +89,11 @@
 
         <!-- Social Login Buttons -->
         <div class="flex gap-2 justify-center">
-            <button class="flex items-center gap-2 w-32 bg-black p-2 rounded-md text-gray-200">
+            <button class="flex items-center gap-2 px-4 bg-black p-2 rounded-md text-gray-200">
                 <i class="ph-bold ph-google-logo"></i>
                 <span>Google</span>
             </button>
-            <button class="flex items-center gap-2 w-32 bg-black p-2 rounded-md text-gray-200">
+            <button class="flex items-center gap-2 px-4 bg-black p-2 rounded-md text-gray-200">
                 <i class="ph-bold ph-github-logo"></i>
                 <span>GitHub</span>
             </button>

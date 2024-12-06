@@ -13,14 +13,32 @@
     @include('customer.navbar')
 
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+        <div class="flex justify-center items-center w-full fixed top-0 right-0 left-0 z-50 alert" id="success-alert">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white bg-opacity-90 rounded-lg shadow">
+                    <button type="button" class="close absolute top-3 end-2.5 text-gray-500 hover:text-red-500" data-dismiss="alert" onclick="closeAlert()">
+                        <i class="ph-bold ph-x"></i>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <h3 class="mt-5 mb-5 text-lg font-normal text-green-500">{{ session('success') }}</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     @endif
 
     @if(session('info'))
-        <div class="alert alert-info">
-            {{ session('info') }}
+        <div class="flex justify-center items-center w-full fixed top-0 right-0 left-0 z-50 alert" id="info-alert">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white bg-opacity-90 rounded-lg shadow">
+                    <button type="button" class="close absolute top-3 end-2.5 text-gray-500 hover:text-red-500" data-dismiss="alert" onclick="closeAlert()">
+                        <i class="ph-bold ph-x"></i>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <h3 class="mt-5 mb-5 text-lg font-normal text-green-500">{{ session('info') }}</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     @endif
 
@@ -152,13 +170,45 @@
                     imageSelected = true;
                 });
             });
+        });
 
-            form.addEventListener('submit', function (e) {
-                if (!sizeSelected || !imageSelected) {
-                    e.preventDefault();
-                    alert('Please select both a size and a product image.');
-                }
-            });
+function closeAlert() {
+    const alert = document.querySelector('[data-dismiss="alert"]').closest('.flex');
+    alert.style.display = 'none';
+}
+
+function closeAlert() {
+            const alert = document.querySelector('[data-dismiss="alert"]').closest('.flex');
+            alert.style.transition = 'opacity 0.5s ease-out';
+            alert.style.opacity = '0';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 500);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const successAlert = document.getElementById('success-alert');
+            const infoAlert = document.getElementById('info-alert');
+
+            if (successAlert) {
+                setTimeout(() => {
+                    successAlert.style.transition = 'opacity 1s';
+                    successAlert.style.opacity = '0';
+                    setTimeout(function () {
+                        successAlert.style.display = 'none';
+                    }, 1000);
+                }, 3000);
+            }
+
+            if (infoAlert) {
+                setTimeout(() => {
+                    infoAlert.style.transition = 'opacity 1s';
+                    infoAlert.style.opacity = '0';
+                    setTimeout(function () {
+                        infoAlert.style.display = 'none';
+                    }, 500);
+                }, 3000);
+            }
         });
     </script>
 </body>

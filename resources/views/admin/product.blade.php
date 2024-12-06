@@ -103,7 +103,19 @@ document.addEventListener('DOMContentLoaded', function () {
     dashboardLink.addEventListener('click', function () {
         sidebar.classList.add('-translate-x-full');
     });
+
+    const alert = document.querySelector('[data-dismiss="alert"]').closest('.flex');
+    if (alert) {
+        setTimeout(function () {
+            alert.style.transition = 'opacity 1s';
+            alert.style.opacity = '0';
+            setTimeout(function () {
+                alert.style.display = 'none';
+            }, 1000);
+        }, 3000);
+    }
 });
+
 function closeAlert() {
     const alert = document.querySelector('[data-dismiss="alert"]').closest('.flex');
     alert.style.display = 'none';

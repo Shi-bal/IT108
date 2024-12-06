@@ -14,28 +14,28 @@
             <div class="flex justify-center">
                 <a href="/"><img class="w-[20px] md:w-[40px]" src="{{ asset('logos/uptrend.png') }}" alt="Logo"></a>
             </div>
-            
+                    
             <div class="absolute sm:static collapse sm:visible">
-    <div class="space-x-4">
-        <!-- User Icon with Dropdown -->
-        <div class="relative inline-block group">
-            <!-- Trigger button with User Icon -->
-            <button class="inline-flex items-center justify-center focus:outline-none">
-                <i class="ph-bold ph-user"></i>
-            </button>
+                <div class="space-x-4">
+                    <!-- User Icon with Dropdown -->
+                    <div class="relative inline-block group">
+                        <!-- Trigger button with User Icon -->
+                        <button class="inline-flex items-center justify-center focus:outline-none">
+                            <i class="ph-bold ph-user"></i>
+                        </button>
 
-            <!-- Dropdown Menu -->
-            <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200">
-                <div class="py-1" role="menu" aria-orientation="vertical">
-                    <a href="/login" class="font-semibold block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Login</a>
-                    <a href="/register" class="font-semibold block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Register</a>
+                        <!-- Dropdown Menu -->
+                        <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200">
+                            <div class="py-1" role="menu" aria-orientation="vertical">
+                                <a href="/login" class="font-semibold block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Login</a>
+                                <a href="/register" class="font-semibold block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Register</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                 </div>
             </div>
-        </div>
-
-        
-    </div>
-</div>
 
         </nav>
     </div>
@@ -69,14 +69,14 @@
             <div class="pb-2">
                 <label for="phone" class="block mb-2 text-sm font-medium text-[#111827]">Phone</label>
                 <div class="relative text-gray-400">
-                    <span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><i class="ph-bold ph-envelope-simple"></i></span>
+                    <span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><i class="ph-bold ph-phone"></i></span>
                     <input type="phone" name="phone" id="phone" class="pl-12 mb-2 bg-gray-50 text-gray-600 border border-gray-300 sm:text-sm rounded-lg focus:ring-1 focus:ring-gray-400 block w-full p-2.5" placeholder="Phone number" required autocomplete="username">
                 </div>
             </div>
             <div class="pb-2">
                 <label for="address" class="block mb-2 text-sm font-medium text-[#111827]">Address</label>
                 <div class="relative text-gray-400">
-                    <span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><i class="ph-bold ph-envelope-simple"></i></span>
+                    <span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><i class="ph-bold ph-house-line"></i></i></span>
                     <input type="address" name="address" id="address" class="pl-12 mb-2 bg-gray-50 text-gray-600 border border-gray-300 sm:text-sm rounded-lg focus:ring-1 focus:ring-gray-400 block w-full p-2.5" placeholder="Address" required autocomplete="username">
                 </div>
             </div>
@@ -108,14 +108,14 @@
 
             <button type="submit" class="w-full text-white bg-black focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6">Sign Up</button>
             
-            <div class="text-sm font-light text-[#6B7280]">
-                Already have an account? <a href="{{ route('login') }}" class="font-medium text-black hover:underline">Login</a>
+            <div class="text-sm font-light text-[#6B7280] flex justify-center">
+                Already have an account?<a href="{{ route('login') }}" class="font-medium text-red-600 hover:text-red-900 underline ml-1">Login</a>
             </div>
         </form>
 
         <!-- OR separator -->
         <div class="relative flex py-8 items-center">
-            <div class="flex-grow border-t border-[1px] border-gray-200"></div> 
+            <div class="flex-grow border-t border-[1px] border-gray-200"></div>
             <span class="flex-shrink mx-4 font-medium text-gray-500">OR</span>
             <div class="flex-grow border-t border-[1px] border-gray-200"></div>
         </div>
