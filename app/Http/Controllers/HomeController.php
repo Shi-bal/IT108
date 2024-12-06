@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
+
 
 
 class HomeController extends Controller
@@ -58,7 +60,6 @@ class HomeController extends Controller
             return $this->index();  
         }
     }
-
 
     public function add_cart(Request $request, $id)
     {
@@ -117,5 +118,66 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+
+       
+    public function add_checkout() {
+
+        $user = Auth::user();
+        $userid = $user->id;
+        
+        $data = cart::where('user_id', '=', $userid)->get();
+
+        foreach($data as $data) {
+
+            $order = new order;
+
+            $order->name = $data->name;
+            $order->email = $data->email;
+            $order->phone = $data->phone;
+            $order->address = $data->address;
+            $order->user_id = $data->user_id;
+
+            $order->price = $data->price;
+            $order->quantity = $data->quantity;
+            $order->image1 = $data->image1;
+            $order->size = $data->size;
+            $order->product_id = $data->product_id;
+            $order->product_title = $data->product_title;
+
+            $order->payment_status = 'Pending';
+            $order->delivery_status = 'Pending';
+
+            $order->save();
+
+            $cart_id = $data->id;
+            $cart = cart::find($cart_id);
+            $cart->delete();
+        }
+
+        return redirect()->route('checkout.view')->with('message', 'Order placed successfully.');
+
+    }
+    //viewcheckout
+
+    
+    public function viewcheckout(){
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->get();
+        return view('customer.checkout', compact('orders'));
+    }
+
+    //remove checkout
+    
+    public function remove_checkout($id){
+        $order=order::find($id);
+
+        $order->delete();
+
+        return redirect()->back();
+    }
+
+
+    
 
 }

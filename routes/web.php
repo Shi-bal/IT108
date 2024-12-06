@@ -48,3 +48,15 @@ Route::get('/show_cart', [HomeController::class, 'show_cart']);
 //remove cart
 
 Route::get('/remove_cart/{id}', [HomeController::class, 'remove_cart'])->name('remove_cart');
+
+//add checkout
+
+Route::post('/checkout', [HomeController::class, 'add_checkout']);
+
+//view checkout
+
+Route::get('/checkout', [HomeController::class, 'viewcheckout'])->name('checkout.view');
+
+// Change GET to DELETE or POST for removing orders
+Route::get('/remove_checkout/{id}', [HomeController::class, 'remove_checkout'])->name('remove_checkout');
+

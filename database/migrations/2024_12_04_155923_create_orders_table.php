@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('quantity')->nullable();
             $table->string('price')->nullable();
             $table->string('image1')->nullable();
+            $table->string('size')->nullable();
             $table->string('product_id')->nullable();
 
             $table->string('payment_status')->nullable();

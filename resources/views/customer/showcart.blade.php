@@ -27,7 +27,7 @@
                     <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm  md:p-6">
                         <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                             <a href="#" class="shrink-0 md:order-1">
-                                <img class="h-40" src="/product/{{$cart->image1}}" alt="" class="object-cover size-14 hover-image pb-[2px] hover:bg-black">
+                                 <img class="h-40" src="{{ $cart->image1 }}" alt="Product Image" class="object-cover size-14 hover-image pb-[2px] hover:bg-black">
                             </a>
                             <div class="flex items-center justify-between md:order-3 md:justify-end">
                                 <div class="flex items-center">
@@ -85,7 +85,12 @@
               </dl>
             </div>
 
-            <a href="#" class="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300">Proceed to Checkout</a>
+            <form action="{{ url('checkout') }}" method="POST" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-sm font-medium text-white">
+                        Proceed to Checkout
+                    </button>
+            </form>
 
             <div class="flex items-center justify-center gap-2">
               <span class="text-sm font-normal text-gray-500"> or </span>
