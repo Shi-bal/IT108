@@ -7,15 +7,15 @@ use App\Http\Controllers\AdminController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
 
 Route::get('/redirect', [HomeController::Class, 'redirect']);
 
@@ -27,6 +27,11 @@ Route::post('/add_product', [AdminController::class, 'add_product'])->name('add_
 
 //show product in admin
 Route::get('/show_product', [AdminController::class, 'show_product'])->name('show_product');
+
+
+//Show orders
+Route::get('/show_orders', [AdminController::class, 'show_orders']);
+
 
 
 
@@ -43,7 +48,7 @@ Route::get('/product_details/{id}', [HomeController::class, 'showProductDetails'
 Route::post('/add_cart/{id}', [HomeController::class, 'add_cart']);
 
 //showcart
-Route::get('/show_cart', [HomeController::class, 'show_cart']);
+Route::get('/show_cart', [HomeController::class, 'show_cart'])->name('showcart.view');
 
 //remove cart
 
@@ -60,3 +65,6 @@ Route::get('/checkout', [HomeController::class, 'viewcheckout'])->name('checkout
 // Change GET to DELETE or POST for removing orders
 Route::get('/remove_checkout/{id}', [HomeController::class, 'remove_checkout'])->name('remove_checkout');
 
+
+//change delivery status
+Route::get('/delivered/{id}', [AdminController::class, 'delivered']);

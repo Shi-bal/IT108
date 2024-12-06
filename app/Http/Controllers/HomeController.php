@@ -107,7 +107,7 @@ class HomeController extends Controller
     
             return view('customer.showcart', compact('cart')); // Passing $cart directly
         } else {
-            return redirect()->route('login')->with('error', 'Please log in to view your cart.');
+            return redirect()->route('showcart.view')->with('error', 'Please log in to view your cart.');
         }
     }
  
@@ -120,44 +120,53 @@ class HomeController extends Controller
     }
 
 
-       
     public function add_checkout() {
 
         $user = Auth::user();
         $userid = $user->id;
         
+        // Fetch user's cart items
         $data = cart::where('user_id', '=', $userid)->get();
-
-        foreach($data as $data) {
-
+    
+        // Check if the cart is empty
+        if ($data->isEmpty()) {
+            // Redirect back with an alert message
+            return redirect()->back()->with('error', 'Add product to proceed!');
+        }
+    
+        // Loop through the cart items to create orders
+        foreach ($data as $data) {
             $order = new order;
-
+    
             $order->name = $data->name;
             $order->email = $data->email;
             $order->phone = $data->phone;
             $order->address = $data->address;
             $order->user_id = $data->user_id;
-
+    
             $order->price = $data->price;
             $order->quantity = $data->quantity;
             $order->image1 = $data->image1;
             $order->size = $data->size;
             $order->product_id = $data->product_id;
             $order->product_title = $data->product_title;
-
+    
             $order->payment_status = 'Pending';
             $order->delivery_status = 'Pending';
-
+    
             $order->save();
-
+    
+            // Remove the item from the cart
             $cart_id = $data->id;
             $cart = cart::find($cart_id);
             $cart->delete();
         }
-
+    
+        // Redirect to the checkout page with a success message
+        // return redirect()->back()->with('message', 'Order placed successfully.');
         return redirect()->route('checkout.view')->with('message', 'Order placed successfully.');
-
     }
+    
     //viewcheckout
 
     

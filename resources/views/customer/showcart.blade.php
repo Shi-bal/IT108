@@ -13,6 +13,39 @@
     <body>
     @include('customer.navbar')
 
+
+    @if(session()->has('error'))
+                <div class="flex justify-center items-center w-full fixed top-0 right-0 left-0 z-50">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white bg-opacity-90 rounded-lg shadow">
+                            <button type="button" class="close absolute top-3 end-2.5 text-gray-500 hover:text-red-500 " data-dismiss="alert" onclick="closeAlert()">
+                                <i class="ph-bold ph-x"></i>
+                            </button>
+                            <div class="p-4 md:p-5 text-center">
+                                <h3 class="mt-5 mb-5 text-lg font-normal text-red-500">{{ session()->get('error') }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            
+
+
+            @if(session()->has('message'))
+                <div class="flex justify-center items-center w-full fixed top-0 right-0 left-0 z-50">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white bg-opacity-90 rounded-lg shadow">
+                            <button type="button" class="close absolute top-3 end-2.5 text-gray-500 hover:text-red-500 " data-dismiss="alert" onclick="closeAlert()">
+                                <i class="ph-bold ph-x"></i>
+                            </button>
+                            <div class="p-4 md:p-5 text-center">
+                                <h3 class="mt-5 mb-5 text-lg font-normal text-green-500">{{ session()->get('message') }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 <?php $shippingFee = 300; ?>
 
   <section class="bg-white py-8 antialiased md:py-16">
@@ -30,11 +63,7 @@
                                  <img class="h-40" src="{{ $cart->image1 }}" alt="Product Image" class="object-cover size-14 hover-image pb-[2px] hover:bg-black">
                             </a>
                             <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                <div class="flex items-center">
-                                    <button class="increase-quantity px-2 border rounded-l-lg border-gray-300 border-r-0 hover:bg-black hover:text-white">+</button>
-                                    <input type="number" value="1" min="1" class="w-12 text-center border border-gray-300">
-                                    <button class="decrease-quantity px-2 border rounded-r-lg border-gray-300 border-l-0 hover:bg-black hover:text-white">-</button>
-                                </div>
+                             
                                 <div class="text-end md:order-4 md:w-32">
                                     <p class="text-base font-bold text-gray-900 ">₱{{number_format($cart->price, 2)}}</p>
                                 </div>
@@ -44,7 +73,7 @@
                                     <a href="#" class="text-base font-medium text-gray-900 hover:underline ">{{$cart->product_title}}</a>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <button class="text-sm font-medium hover:underline"><i class="fa-regular fa-heart me-1.5"></i>Add to Favorites</button>
+                                    <p class="text-sm font-medium hover:underline">{{$cart->size}}</p>
                                     <a href="{{url('remove_cart', $cart->id)}}">
                                         
                                         <button type="submit" class="text-sm font-medium hover:underline text-red-600">
@@ -87,8 +116,31 @@
 
             <form action="{{ url('checkout') }}" method="POST" class="w-full">
                     @csrf
+
+                    
+                    <div class="flex items-center justify-center gap-2">
+                        <p class="inline-flex items-center gap-2 text-sm font-medium text-gray-500">
+                            Choose a payment option
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2">
+                            <input type="radio" id="credit-card" name="payment" value="credit-card" class="form-radio text-black" checked>
+                            <label for="credit-card" class="text-base font-medium text-gray-700">Credit/Debit Card</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="radio" id="paypal" name="payment" value="paypal" class="form-radio text-black">
+                            <label for="paypal" class="text-base font-medium text-gray-700">PayPal</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="radio" id="cod" name="payment" value="cash-on-delivery" class="form-radio text-black">
+                            <label for="cod" class="text-base font-medium text-gray-700">Cash on Delivery</label>
+                        </div>
+                    </div>
+
                     <button type="submit" class="w-full flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-sm font-medium text-white">
-                        Proceed to Checkout
+                        Place Order
                     </button>
             </form>
 
@@ -104,6 +156,8 @@
       </div>
     </div>
   </section>
+
+  
 
 </body>
 </html>

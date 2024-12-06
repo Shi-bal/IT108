@@ -30,9 +30,9 @@
                         <th scope="col" class="px-6 py-3">Description</th>
                         <th scope="col" class="px-6 py-3">Quantity</th>
                         <th scope="col" class="px-6 py-3">Price</th>
-                        <th scope="col" class="px-6 py-3 text-center">Image 1</th>
-                        <th scope="col" class="px-6 py-3 text-center">Image 2</th>
-                        <th scope="col" class="px-6 py-3 text-center">Image 3</th>
+                        <th scope="col" class="px-6 py-3 text-center">Variant 1</th>
+                        <th scope="col" class="px-6 py-3 text-center">Variant 2</th>
+                        <th scope="col" class="px-6 py-3 text-center">Variant 3</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,7 @@
                         <td class="px-6 py-4">{{$product->product_title}}</td>
                         <td class="px-6 py-4">{{$product->description}}</td>
                         <td class="px-6 py-4">{{$product->quantity}}</td>
-                        <td class="px-6 py-4">₱{{$product->price}}</td>
+                        <td class="px-6 py-4">₱{{number_format($product->price)}}</td>
                         <td class="px-6 py-4">
                             <img class="" src="/product/{{$product->image1}}">
                         </td>

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
+
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminController extends Controller
 {
@@ -61,4 +65,39 @@ class AdminController extends Controller
         // Pass the data to the view
         return view('admin.show_product', compact('product'));
     }
+
+
+    public function show_orders() 
+    {
+        if(Auth::id()){
+            $user = Auth::user();
+
+            $order = DB::table('order_details_view')->get();
+            return view('admin.show_orders', compact('order'));
+        }else{
+            return redirect()->route('login')->with('error', 'Please log in to add items to the cart.');
+
+        }
+    }
+
+    public function delivered($id)
+    {
+        // Fetch the order from the view
+        $order = DB::table('order_details_view')->where('order_id', $id)->first();
+    
+        if (!$order) {
+            return redirect()->back()->with('error', 'Order not found.');
+        }
+    
+        // Update the original `orders` table
+        DB::table('orders')
+            ->where('id', $id)
+            ->update([
+                'delivery_status' => 'delivered',
+                'payment_status' => 'Paid'
+            ]);
+    
+        return redirect()->back()->with('success', 'Order marked as delivered.');
+    }
+    
 }
