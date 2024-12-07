@@ -20,39 +20,44 @@ class AdminController extends Controller
 
     public function add_product(Request $request)
     {
-        $product = new Product;
-
-        $product->product_title = $request->product_title;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->quantity = $request->quantity;
-
+        $image1 = null;
+        $image2 = null;
+        $image3 = null;
 
         // Handle the first image
         if ($request->hasFile('image1')) {
-            $image1 = $request->file('image1');
-            $imageName1 = time() . '_1.' . $image1->getClientOriginalExtension();
-            $image1->move('product', $imageName1);
-            $product->image1 = $imageName1; // Adjust database column name if needed
+            $file1 = $request->file('image1');
+            $image1 = time() . '_1.' . $file1->getClientOriginalExtension();
+            $file1->move('product', $image1);
         }
 
         // Handle the second image
         if ($request->hasFile('image2')) {
-            $image2 = $request->file('image2');
-            $imageName2 = time() . '_2.' . $image2->getClientOriginalExtension();
-            $image2->move('product', $imageName2);
-            $product->image2 = $imageName2; // Adjust database column name if needed
+            $file2 = $request->file('image2');
+            $image2 = time() . '_2.' . $file2->getClientOriginalExtension();
+            $file2->move('product', $image2);
         }
 
         // Handle the third image
         if ($request->hasFile('image3')) {
-            $image3 = $request->file('image3');
-            $imageName3 = time() . '_3.' . $image3->getClientOriginalExtension();
-            $image3->move('product', $imageName3);
-            $product->image3 = $imageName3; // Adjust database column name if needed
+            $file3 = $request->file('image3');
+            $image3 = time() . '_3.' . $file3->getClientOriginalExtension();
+            $file3->move('product', $image3);
         }
 
-        $product->save();
+        // Insert product data using DB::insert
+        DB::insert(
+            'INSERT INTO products (product_title, description, price, quantity, image1, image2, image3, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+            [
+                $request->product_title,
+                $request->description,
+                $request->price,
+                $request->quantity,
+                $image1,
+                $image2,
+                $image3
+            ]
+        );
 
         return redirect()->back()->with('message', 'Product Added Successfully!');
     }
@@ -65,7 +70,6 @@ class AdminController extends Controller
         // Pass the data to the view
         return view('admin.show_product', compact('product'));
     }
-
 
     public function show_orders() 
     {
